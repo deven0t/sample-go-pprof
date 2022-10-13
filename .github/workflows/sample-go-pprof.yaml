@@ -10,8 +10,12 @@ env:
 jobs:
   verify-code:
     name: Verify code
-    runs-on: golang:1.18-alpine3.14
+    runs-on: ubuntu-22.04
     steps:
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ env.GO_VERSION }}
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Verify Go code
@@ -23,3 +27,4 @@ jobs:
           skip-build-cache: true
       - name: Vendor Go modules
         run: go mod vendor
+      - name: 

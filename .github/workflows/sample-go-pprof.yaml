@@ -27,4 +27,3 @@ jobs:
           skip-build-cache: true
       - name: Vendor Go modules
         run: go mod vendor
-      - name: 

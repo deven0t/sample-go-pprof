@@ -1,0 +1,25 @@
+name: sample-go-pprof
+run-name: ${{ github.actor }} building...
+on: 
+  push:
+    branches:
+      - main
+env:
+  GO_VERSION: "1.19.1"
+
+jobs:
+  verify-code:
+    name: Verify code
+    runs-on: golang:1.18-alpine3.14
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Verify Go code
+        uses: golangci/golangci-lint-action@v3.2.0
+        with:
+          args: --verbose
+          version: latest
+          skip-pkg-cache: true
+          skip-build-cache: true
+      - name: Vendor Go modules
+        run: go mod vendor
